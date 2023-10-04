@@ -1,22 +1,25 @@
 import { Edge, Vertex } from '../settings';
 import { quickSort } from './sort';
 
-export function nodes(w: number, h: number): Vertex[][] {
+export function nodes(h: number, w: number): Vertex[][] {
   return Array(h)
     .fill(Array(w).fill(0))
     .map((_, i) => _.map((_: number[], j: number) => [i, j]));
 }
 
-export function edges(ns: Vertex[][], f: () => number): Edge[] {
+export function edges(
+  ns: Vertex[][],
+  f: (fi: number, fj: number, ti: number, tj: number) => number
+): Edge[] {
   const ret: Edge[] = [];
 
   for (let i = 0; i < ns.length; ++i) {
     for (let j = 0; j < ns[i].length; ++j) {
       if (j + 1 < ns[i].length) {
-        ret.push({ v0: ns[i][j], v1: ns[i][j + 1], weight: f() });
+        ret.push({ v0: ns[i][j], v1: ns[i][j + 1], weight: f(i, j, i, j + 1) });
       }
       if (i + 1 < ns.length) {
-        ret.push({ v0: ns[i][j], v1: ns[i + 1][j], weight: f() });
+        ret.push({ v0: ns[i][j], v1: ns[i + 1][j], weight: f(i, j, i + 1, j) });
       }
     }
   }

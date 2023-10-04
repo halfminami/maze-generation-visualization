@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import Maze from './Maze';
 import { edges, mathrandint, nodes } from './generation/gen';
-import { noWall, wait, wall } from './settings';
+import { Vertex, noWall, wait, wall } from './settings';
 import { primGen } from './generation/spanningTree';
 
 function App() {
@@ -41,7 +41,7 @@ function App() {
           onClick={async () => {
             setDisabled(true);
 
-            const prim = primGen(edges(nodes(w, h), () => mathrandint(0, 10)));
+            const prim = primGen(edges(nodes(h, w), () => mathrandint(0, 10)));
             const nwr = newWallRight();
             const nwb = newWallBottom();
 
