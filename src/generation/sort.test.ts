@@ -44,11 +44,11 @@ function runTest(sortFunc: (arr: number[]) => void) {
   wrapTest([1, 0], 'array length 2');
   wrapTest([1, 2, 0], 'array length 3');
   wrapTest([0, 1, 2, 3, 4, 5], 'sorted array');
-  wrapTest([3, 3, 3, 3], 'same values (1)');
-  wrapTest([5, 5, 5, 9, 5], 'same values (2)');
-  wrapTest([7, 0, 4, 7, 5, 8, 9, 9, 7, 9], 'same values (3)');
-  wrapTest([0, 3, 2, 2, 4, 1, 2], 'same values (4)');
-  wrapTest([0, 0, 0, 1, 1, 1, 2, 2, 2], 'same values (5)');
+  wrapTest([3, 3, 3, 3], 'same values');
+  wrapTest([5, 5, 5, 9, 5], 'same values');
+  wrapTest([7, 0, 4, 7, 5, 8, 9, 9, 7, 9], 'same values');
+  wrapTest([0, 3, 2, 2, 4, 1, 2], 'same values');
+  wrapTest([0, 0, 0, 1, 1, 1, 2, 2, 2], 'same values');
   wrapTest(sortsBigArray, 'big array');
 }
 
