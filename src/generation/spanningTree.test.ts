@@ -1,88 +1,48 @@
 import { Edge, Vertex } from '../settings';
 import { edges, nodes } from './gen';
 import { primGen } from './spanningTree';
+import { SpanningTreeTestArg, spanningTreeTests } from './testdata';
 
-describe("prim's algorithm", () => {
-  const h = 3,
-    w = 4;
-
-  const weightsRight = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-  ];
-  const weightsBottom = [
-    [9, 10, 11, 12],
-    [13, 14, 15, 16],
-  ];
-  const spanningShouldbe: [[number, number], [number, number]][] = [
-    [
-      [0, 0],
-      [0, 1],
-    ],
-    [
-      [0, 1],
-      [0, 2],
-    ],
-    [
-      [0, 2],
-      [0, 3],
-    ],
-    [
-      [0, 0],
-      [1, 0],
-    ],
-    [
-      [1, 0],
-      [1, 1],
-    ],
-    [
-      [1, 1],
-      [1, 2],
-    ],
-    [
-      [1, 2],
-      [1, 3],
-    ],
-    [
-      [1, 0],
-      [2, 0],
-    ],
-    [
-      [2, 0],
-      [2, 1],
-    ],
-    [
-      [2, 1],
-      [2, 2],
-    ],
-    [
-      [2, 2],
-      [2, 3],
-    ],
-  ];
-
-  test('finds minimum spanning tree', () => {
-    const prim = primGen(
-      edges(nodes(h, w), (fi, fj, ti, tj) => {
-        if (fi == ti) {
-          return weightsRight[fi][Math.min(fj, tj)];
-        } else {
-          return weightsBottom[Math.min(fi, ti)][fj];
-        }
-      })
-    );
-
-    let cur;
-    while (true) {
-      cur = prim.next();
-      if (cur.done) {
-        break;
-      }
-    }
-    expect(hasSameEdges(cur.value, spanningShouldbe)).toBe(true);
+describe('spanning trees', () => {
+  describe("prim's algorithm", () => {
+    runTest(primGen);
   });
 });
+
+function runTest(spanningGen: (es: Edge[]) => Generator<any, Edge[], unknown>) {
+  function wrapTest({
+    h,
+    w,
+    weightsRight,
+    weightsBottom,
+    minimumTree,
+    desc,
+  }: SpanningTreeTestArg) {
+    test(desc, () => {
+      const gen = spanningGen(
+        edges(nodes(h, w), (fi, fj, ti, tj) => {
+          if (fi == ti) {
+            return weightsRight[fi][Math.min(fj, tj)];
+          } else {
+            return weightsBottom[Math.min(fi, ti)][fj];
+          }
+        })
+      );
+
+      let cur;
+      while (true) {
+        cur = gen.next();
+        if (cur.done) {
+          break;
+        }
+      }
+
+      expect(hasSameEdges(cur.value, minimumTree)).toBe(true);
+    });
+  }
+
+  wrapTest(spanningTreeTests[0]);
+}
 
 function hasSameEdges(
   edgesOri: Edge[],

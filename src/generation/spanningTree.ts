@@ -38,6 +38,7 @@ export function* primGen(es: Edge[]) {
     for (let i = 0; i < currentEdges.length; ++i) {
       const edge = currentEdges[i];
 
+      // do not modify edge array to splice from back
       tosplice.push(i);
 
       if (!addedVertex.has(edge.v0) || !addedVertex.has(edge.v1)) {

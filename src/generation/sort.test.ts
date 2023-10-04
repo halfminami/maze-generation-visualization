@@ -1,7 +1,24 @@
 import { insertionSort, quickSort } from './sort';
-import { bigarray } from './testdata';
+import { sortsBigArray } from './testdata';
 
-const runTest = (sortFunc: (arr: number[]) => void) => {
+describe('sorts', () => {
+  const cmpOk = (a: number, b: number) => a < b;
+  const cmpEq = (a: number, b: number) => a == b;
+
+  describe('insertion sort', () => {
+    runTest((arr) => {
+      insertionSort(arr, cmpOk);
+    });
+  });
+
+  describe('quick sort', () => {
+    runTest((arr) => {
+      quickSort(arr, cmpEq, cmpOk);
+    });
+  });
+});
+
+function runTest(sortFunc: (arr: number[]) => void) {
   function wrapTest(arr: number[], desc: string) {
     test(desc, () => {
       const arr0 = arr.concat();
@@ -32,25 +49,8 @@ const runTest = (sortFunc: (arr: number[]) => void) => {
   wrapTest([7, 0, 4, 7, 5, 8, 9, 9, 7, 9], 'same values (3)');
   wrapTest([0, 3, 2, 2, 4, 1, 2], 'same values (4)');
   wrapTest([0, 0, 0, 1, 1, 1, 2, 2, 2], 'same values (5)');
-  wrapTest(bigarray, 'big array');
-};
-
-describe('sorts', () => {
-  const cmpOk = (a: number, b: number) => a < b;
-  const cmpEq = (a: number, b: number) => a == b;
-
-  describe('insertion sort', () => {
-    runTest((arr) => {
-      insertionSort(arr, cmpOk);
-    });
-  });
-
-  describe('quick sort', () => {
-    runTest((arr) => {
-      quickSort(arr, cmpEq, cmpOk);
-    });
-  });
-});
+  wrapTest(sortsBigArray, 'big array');
+}
 
 function normalSort(arr: number[]) {
   arr.sort((a, b) => a - b);

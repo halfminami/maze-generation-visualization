@@ -11,7 +11,7 @@ function qSort<T>(
     r = right,
     same = true;
   for (let k = left; k <= right; ++k) {
-    if (piv != arr[k]) {
+    if (piv !== arr[k]) {
       same = false;
       if (cmpOk(piv, arr[k])) {
         piv = arr[k];
@@ -71,7 +71,7 @@ export function insertionSort<T>(arr: T[], cmpOk: (_0: T, _1: T) => boolean) {
 }
 
 function arrswap<T>(arr: T[], idx1: number, idx2: number): void {
-  if (idx1 == idx2) {
+  if (idx1 === idx2) {
     return;
   }
   if (idx1 < 0 || idx2 < 0 || idx1 > arr.length || idx2 > arr.length) {

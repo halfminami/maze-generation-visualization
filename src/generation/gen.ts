@@ -30,7 +30,7 @@ export function edges(
 export function sortEdges(arr: Edge[]) {
   quickSort(
     arr,
-    (a, b) => a.weight == b.weight,
+    (a, b) => a.weight === b.weight,
     (a, b) => a.weight < b.weight
   );
 }

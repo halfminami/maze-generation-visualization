@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import Maze from './Maze';
 import { edges, mathrandint, nodes } from './generation/gen';
-import { Vertex, noWall, wait, wall } from './settings';
+import { noWall, wait, wall } from './settings';
 import { primGen } from './generation/spanningTree';
 
 function App() {
@@ -50,7 +50,7 @@ function App() {
               if (!cur.done) {
                 const edge = cur.value;
 
-                if (edge.v0[0] == edge.v1[0]) {
+                if (edge.v0[0] === edge.v1[0]) {
                   nwr[edge.v0[0]][Math.min(edge.v0[1], edge.v1[1])] = noWall;
                 } else {
                   nwb[Math.min(edge.v0[0], edge.v1[0])][edge.v0[1]] = noWall;

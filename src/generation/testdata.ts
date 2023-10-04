@@ -1,5 +1,5 @@
 // 1000 data!
-export const bigarray = [
+export const sortsBigArray = [
   5, 8, 2, 1, 9, 4, 7, 8, 8, 1, 9, 9, 8, 1, 2, 2, 0, 7, 6, 4, 9, 5, 9, 8, 4, 8,
   3, 3, 8, 9, 6, 4, 7, 7, 5, 7, 5, 2, 8, 7, 8, 2, 0, 2, 3, 1, 1, 5, 2, 0, 0, 4,
   4, 4, 2, 6, 5, 0, 6, 7, 4, 9, 3, 9, 4, 7, 4, 9, 7, 7, 3, 8, 3, 8, 3, 8, 5, 7,
@@ -39,4 +39,75 @@ export const bigarray = [
   8, 6, 8, 2, 3, 8, 3, 9, 4, 7, 8, 7, 4, 5, 4, 4, 3, 2, 7, 0, 9, 0, 0, 6, 3, 3,
   9, 9, 6, 2, 3, 8, 5, 9, 7, 6, 4, 7, 0, 1, 1, 2, 4, 4, 8, 0, 9, 1, 9, 8, 7, 0,
   6, 9, 5, 2, 5, 2, 6, 2, 0, 6, 5, 5,
+];
+
+export type SpanningTreeTestArg = {
+  h: number;
+  w: number;
+  weightsRight: number[][];
+  weightsBottom: number[][];
+  minimumTree: [[number, number], [number, number]][];
+  desc: string;
+};
+export const spanningTreeTests: SpanningTreeTestArg[] = [
+  {
+    h: 3,
+    w: 4,
+    weightsRight: [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+    ],
+    weightsBottom: [
+      [9, 10, 11, 12],
+      [13, 14, 15, 16],
+    ],
+    minimumTree: [
+      [
+        [0, 0],
+        [0, 1],
+      ],
+      [
+        [0, 1],
+        [0, 2],
+      ],
+      [
+        [0, 2],
+        [0, 3],
+      ],
+      [
+        [0, 0],
+        [1, 0],
+      ],
+      [
+        [1, 0],
+        [1, 1],
+      ],
+      [
+        [1, 1],
+        [1, 2],
+      ],
+      [
+        [1, 2],
+        [1, 3],
+      ],
+      [
+        [1, 0],
+        [2, 0],
+      ],
+      [
+        [2, 0],
+        [2, 1],
+      ],
+      [
+        [2, 1],
+        [2, 2],
+      ],
+      [
+        [2, 2],
+        [2, 3],
+      ],
+    ],
+    desc: 'finds minimum spanning tree',
+  },
 ];
