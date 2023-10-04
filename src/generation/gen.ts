@@ -31,3 +31,13 @@ export function sortEdges(arr: Edge[]) {
     (a, b) => a.weight < b.weight
   );
 }
+
+// includes begin and end
+export function mathrandint(begin: number, end: number): number {
+  end++;
+  if (0 < end - begin && end - begin < 1) return Math.floor(end);
+  begin = Math.ceil(begin);
+  end = Math.floor(end);
+  if (end - begin < 0) return 0;
+  return Math.min(Math.floor(Math.random() * (end - begin)) + begin, end - 1);
+}

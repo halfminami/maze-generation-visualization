@@ -13,7 +13,6 @@ function Maze({ wallRight, wallBottom, w, h }: Arg) {
   while (wallRight.length < h) {
     wallRight.push('');
   }
-  console.log(wallRight);
 
   return (
     <div
