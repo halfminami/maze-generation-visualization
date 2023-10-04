@@ -42,6 +42,8 @@ function runTest(spanningGen: (es: Edge[]) => Generator<any, Edge[], unknown>) {
   }
 
   wrapTest(spanningTreeTests[0]);
+  wrapTest(spanningTreeTests[1]);
+  wrapTest(spanningTreeTests[2]);
 }
 
 function hasSameEdges(
