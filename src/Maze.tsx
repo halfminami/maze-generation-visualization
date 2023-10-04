@@ -41,16 +41,16 @@ function Maze({ wallRight, wallBottom, w, h }: Arg) {
           })()} ${(function () {
             // checks for input walls
             let s = '';
-            if (wallRight[i][j] == wall) {
+            if (wallRight[i][j] === wall) {
               s += 'right ';
             }
-            if (wallRight[i][j - 1] == wall) {
+            if (wallRight[i][j - 1] === wall) {
               s += 'left ';
             }
-            if (i < h - 1 && wallBottom[i][j] == wall) {
+            if (i < h - 1 && wallBottom[i][j] === wall) {
               s += 'bottom ';
             }
-            if (i - 1 >= 0 && wallBottom[i - 1][j] == wall) {
+            if (i - 1 >= 0 && wallBottom[i - 1][j] === wall) {
               s += 'top ';
             }
 
