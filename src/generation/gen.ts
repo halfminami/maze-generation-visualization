@@ -1,13 +1,13 @@
-import { Edge, Node } from '../settings';
+import { Edge, Vertex } from '../settings';
 import { quickSort } from './sort';
 
-export function nodes(w: number, h: number): Node[][] {
+export function nodes(w: number, h: number): Vertex[][] {
   return Array(h)
     .fill(Array(w).fill(0))
     .map((_, i) => _.map((_: number[], j: number) => [i, j]));
 }
 
-export function edges(ns: Node[][], f: () => number): Edge[] {
+export function edges(ns: Vertex[][], f: () => number): Edge[] {
   const ret: Edge[] = [];
 
   for (let i = 0; i < ns.length; ++i) {
