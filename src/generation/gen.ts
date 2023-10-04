@@ -1,5 +1,5 @@
 import { Edge, Vertex } from '../settings';
-import { quickSort } from './sort';
+import { insertionSort, quickSort } from './sort';
 
 export function nodes(h: number, w: number): Vertex[][] {
   return Array(h)
@@ -27,12 +27,16 @@ export function edges(
 }
 
 /** sort edges weight increasing order */
-export function sortEdges(arr: Edge[]) {
+export function quickSortEdges(arr: Edge[]) {
   quickSort(
     arr,
     (a, b) => a.weight === b.weight,
     (a, b) => a.weight < b.weight
   );
+}
+
+export function insertionSortEdges(arr: Edge[]) {
+  insertionSort(arr, (a, b) => a.weight < b.weight);
 }
 
 // includes begin and end

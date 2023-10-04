@@ -1,5 +1,5 @@
 import { Edge, Vertex } from '../settings';
-import { sortEdges } from './gen';
+import { insertionSortEdges, quickSortEdges } from './gen';
 import { insertionSort } from './sort';
 
 // Prim's algorithm
@@ -30,7 +30,7 @@ export function* primGen(es: Edge[]) {
   d.get(es[0].v0)!.forEach((item) => currentEdgeSet.add(item));
 
   while (addedVertex.size < d.size) {
-    sortEdges(currentEdges);
+    insertionSortEdges(currentEdges);
 
     let isAdded = false;
     const tosplice = []; // edges added or not selected are removed.
