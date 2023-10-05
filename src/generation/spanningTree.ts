@@ -1,9 +1,13 @@
 import { Edge, Vertex } from '../settings';
-import { insertionSortEdges, quickSortEdges } from './gen';
+import { quickSortEdges } from './gen';
 import { insertionSort } from './sort';
 
 // Prim's algorithm
 export function* primGen(es: Edge[]) {
+  if (es.length === 0) {
+    return [];
+  }
+
   const d: Map<Vertex, Edge[]> = new Map();
   // map Node => Edge
   for (const item of es) {
@@ -26,11 +30,12 @@ export function* primGen(es: Edge[]) {
   const selectedEdges: Edge[] = [];
 
   addedVertex.add(es[0].v0);
+
   currentEdges.push(...d.get(es[0].v0)!);
   d.get(es[0].v0)!.forEach((item) => currentEdgeSet.add(item));
 
   while (addedVertex.size < d.size) {
-    insertionSortEdges(currentEdges);
+    quickSortEdges(currentEdges);
 
     let isAdded = false;
     const tosplice = []; // edges added or not selected are removed.
@@ -69,8 +74,10 @@ export function* primGen(es: Edge[]) {
       break;
     } else {
       insertionSort(tosplice, (a, b) => a < b);
+
       for (let i = tosplice.length - 1; i >= 0; --i) {
         const item = tosplice[i];
+
         currentEdgeSet.delete(currentEdges[item]);
         currentEdges.splice(item, 1);
       }
