@@ -104,12 +104,6 @@ export class UnionFind<T> {
     return Object.keys(this.unionVs).map((item) => ({ ...this.unionVs[item] }));
   }
   getSet() {
-    // const ret= Object.keys(this.setInfo).map((item) :{setName:string}=> ({
-    //   setName: item,
-    //   // @ts-ignore
-    //   ...this.setInfo[item],
-    // }));
     return this.setInfo.filter((item) => item);
-    // return this.setInfo;
   }
 }

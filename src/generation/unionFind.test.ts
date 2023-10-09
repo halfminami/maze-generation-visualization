@@ -143,4 +143,33 @@ describe('union find', () => {
       });
     });
   });
+
+  describe('duplicate edges', () => {
+    const unionFind = new UnionFind((a: number) => a.toString());
+
+    beforeAll(() => {
+      unionFind.add(0, 3);
+      unionFind.add(2, 1);
+      unionFind.add(0, 2);
+    });
+
+    test('merges', () => {
+      expect(unionFind.getSet().length).toBe(1);
+      expect(unionFind.getSet()[0]!.size).toBe(4);
+    });
+
+    describe('', () => {
+      beforeAll(() => {
+        unionFind.add(3, 0);
+        unionFind.add(2, 1);
+        unionFind.add(2, 3);
+        unionFind.add(0, 1);
+      });
+
+      test('set does not change', () => {
+        expect(unionFind.getSet().length).toBe(1);
+        expect(unionFind.getSet()[0]!.size).toBe(4);
+      });
+    });
+  });
 });
