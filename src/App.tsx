@@ -1,15 +1,13 @@
 import { useState } from 'react';
 import './App.css';
-import Maze from './Maze';
+import Maze from './components/Maze';
 import { gridEdge, mathrandint, gridVertex } from './generation/func';
 import { noWall, wait, wall } from './settings';
-import { primGen } from './generation/spanningTree';
+import { kruskalGen, primGen } from './generation/spanningTree';
 
 function App() {
   const w = 10,
     h = 10;
-  // const w = 4,
-  //   h = 3;
 
   // fill Array(n) first! otherwise, the array would have same array
   // (changing the nwr[0][1] will result in changing nwr[i][1] for all i)
@@ -31,17 +29,26 @@ function App() {
 
   const [disabled, setDisabled] = useState(false);
 
+  const [toggle, setToggle] = useState<'prim' | 'kruskal'>('prim');
+
   return (
     <section>
       <h1>maze</h1>
       <main>
         <p>The maze is surrounded by walls</p>
         <button
+          onClick={(f) => setToggle(toggle === 'prim' ? 'kruskal' : 'prim')}
+        >
+          {toggle}
+        </button>
+        <button
           {...{ disabled }}
           onClick={async () => {
             setDisabled(true);
 
-            const prim = primGen(
+            const gen = toggle === 'prim' ? primGen : kruskalGen;
+
+            const prim = gen(
               gridEdge(gridVertex(h, w), () => mathrandint(0, 10))
             );
             const nwr = newWallRight();

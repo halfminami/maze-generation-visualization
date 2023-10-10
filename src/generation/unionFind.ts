@@ -15,7 +15,7 @@ export class UnionFind<T> {
     return !!(
       this.unionVs[this.stringify(a)] &&
       this.unionVs[this.stringify(b)] &&
-      this.unionVs[this.stringify(a)].setName ==
+      this.unionVs[this.stringify(a)].setName ===
         this.unionVs[this.stringify(b)].setName
     );
   }
@@ -27,7 +27,7 @@ export class UnionFind<T> {
       const aSet = this.setInfo[aV.setName]!,
         bSet = this.setInfo[bV.setName]!;
 
-      if (aV.setName == bV.setName) {
+      if (aV.setName === bV.setName) {
         return;
       }
 
@@ -39,17 +39,17 @@ export class UnionFind<T> {
         bigger = a;
       }
 
-      this.#merge(smaller, bigger);
+      this.__merge(smaller, bigger);
     } else if (this.unionVs[this.stringify(a)]) {
       const exists = a,
         nonex = b;
 
-      this.#addOne(exists, nonex);
+      this.__addOne(exists, nonex);
     } else if (this.unionVs[this.stringify(b)]) {
       const exists = b,
         nonex = a;
 
-      this.#addOne(exists, nonex);
+      this.__addOne(exists, nonex);
     } else {
       const vb = { item: b, next: null, setName: this.setInfo.length };
       const va = { item: a, next: vb, setName: this.setInfo.length };
@@ -58,7 +58,7 @@ export class UnionFind<T> {
       this.unionVs[this.stringify(b)] = vb;
     }
   }
-  #addOne(exists: T, nonex: T) {
+  __addOne(exists: T, nonex: T) {
     const vex = this.unionVs[this.stringify(exists)];
     const vnonex = {
       item: nonex,
@@ -70,7 +70,7 @@ export class UnionFind<T> {
     this.setInfo[vex.setName]!.size++;
     this.setInfo[vex.setName]!.head = vnonex;
   }
-  #merge(smaller: T, bigger: T) {
+  __merge(smaller: T, bigger: T) {
     const smallerV = this.unionVs[this.stringify(smaller)],
       biggerV = this.unionVs[this.stringify(bigger)];
     const smallerSet = this.setInfo[smallerV.setName]!,

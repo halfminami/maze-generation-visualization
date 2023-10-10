@@ -1,7 +1,7 @@
 import React from 'react';
 import './Maze.scss';
 import ToggleButton from './ToggleButton';
-import { wall } from './settings';
+import { wall } from '../settings';
 
 type Arg = { wallRight: string[]; wallBottom: string[]; w: number; h: number };
 
