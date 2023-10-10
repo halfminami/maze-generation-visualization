@@ -7,14 +7,8 @@ export class UnionFind<T> {
   unionVs: { [key: string]: UnionV<T> } = {};
   setInfo: (SetInfo<T> | undefined)[] = [];
 
-  constructor(stringify: (_: T) => string, copy?: UnionFind<T>) {
-    if (copy) {
-      this.stringify = copy.stringify;
-      this.unionVs = copy.unionVs;
-      this.setInfo = copy.setInfo;
-    } else {
-      this.stringify = stringify;
-    }
+  constructor(stringify: (_: T) => string) {
+    this.stringify = stringify;
   }
 
   isInSameSet(a: T, b: T) {
@@ -37,12 +31,10 @@ export class UnionFind<T> {
         return;
       }
 
-      let smaller, bigger;
-
-      if (aSet.size < bSet.size) {
-        smaller = a;
+      let smaller = a,
         bigger = b;
-      } else {
+
+      if (aSet.size > bSet.size) {
         smaller = b;
         bigger = a;
       }

@@ -1,13 +1,13 @@
 import { Edge, Vertex } from '../settings';
 import { insertionSort, quickSort } from './sort';
 
-export function nodes(h: number, w: number): Vertex[][] {
+export function gridVertex(h: number, w: number): Vertex[][] {
   return Array(h)
     .fill(Array(w).fill(0))
     .map((_, i) => _.map((_: number[], j: number) => [i, j]));
 }
 
-export function edges(
+export function gridEdge(
   ns: Vertex[][],
   f: (fi: number, fj: number, ti: number, tj: number) => number
 ): Edge[] {
@@ -24,6 +24,19 @@ export function edges(
     }
   }
   return ret;
+}
+
+export function mapVertexToEdge(d: Map<Vertex, Edge[]>, es: Edge[]) {
+  for (const item of es) {
+    if (!d.has(item.v0)) {
+      d.set(item.v0, []);
+    }
+    if (!d.has(item.v1)) {
+      d.set(item.v1, []);
+    }
+    d.set(item.v0, d.get(item.v0)!.concat([item]));
+    d.set(item.v1, d.get(item.v1)!.concat([item]));
+  }
 }
 
 /** sort edges weight increasing order */

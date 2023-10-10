@@ -1,10 +1,10 @@
-import { edges, nodes } from './gen';
+import { gridEdge, gridVertex } from './func';
 
 describe('nodes and edges', () => {
   const w = 3,
     h = 4,
     f = () => 0;
-  const ns = nodes(w, h);
+  const ns = gridVertex(w, h);
 
   test('node index', () => {
     let f = true;
@@ -18,7 +18,7 @@ describe('nodes and edges', () => {
     expect(f).toBe(true);
   });
 
-  const es = edges(ns, f);
+  const es = gridEdge(ns, f);
 
   test('length', () => {
     expect(es.length).toBe(h * (w - 1) + w * (h - 1));

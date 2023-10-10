@@ -1,5 +1,5 @@
 import { Edge, Vertex } from '../settings';
-import { quickSortEdges } from './gen';
+import { mapVertexToEdge, quickSortEdges } from './func';
 import { insertionSort } from './sort';
 
 // Prim's algorithm
@@ -9,17 +9,7 @@ export function* primGen(es: Edge[]) {
   }
 
   const d: Map<Vertex, Edge[]> = new Map();
-  // map Node => Edge
-  for (const item of es) {
-    if (!d.has(item.v0)) {
-      d.set(item.v0, []);
-    }
-    if (!d.has(item.v1)) {
-      d.set(item.v1, []);
-    }
-    d.set(item.v0, d.get(item.v0)!.concat([item]));
-    d.set(item.v1, d.get(item.v1)!.concat([item]));
-  }
+  mapVertexToEdge(d, es);
 
   const addedVertex: Set<Vertex> = new Set();
 

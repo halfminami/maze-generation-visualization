@@ -1,5 +1,5 @@
 import { Edge, Vertex } from '../settings';
-import { edges, nodes } from './gen';
+import { gridEdge, gridVertex } from './func';
 import { primGen } from './spanningTree';
 import { SpanningTreeTestArg, spanningTreeTests } from './testdata';
 
@@ -20,7 +20,7 @@ function runTest(spanningGen: (es: Edge[]) => Generator<any, Edge[], unknown>) {
   }: SpanningTreeTestArg) {
     test(desc, () => {
       const gen = spanningGen(
-        edges(nodes(h, w), (fi, fj, ti, tj) => {
+        gridEdge(gridVertex(h, w), (fi, fj, ti, tj) => {
           if (fi == ti) {
             return weightsRight[fi][Math.min(fj, tj)];
           } else {
