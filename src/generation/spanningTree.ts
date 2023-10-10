@@ -1,6 +1,7 @@
 import { Edge, Vertex } from '../settings';
 import { mapVertexToEdge, quickSortEdges } from './func';
 import { insertionSort } from './sort';
+import { UnionFind } from './unionFind';
 
 // Prim's algorithm
 export function* primGen(es: Edge[]) {
@@ -71,6 +72,29 @@ export function* primGen(es: Edge[]) {
         currentEdgeSet.delete(currentEdges[item]);
         currentEdges.splice(item, 1);
       }
+    }
+  }
+
+  return selectedEdges;
+}
+
+// Kruskal's algorithm
+export function* kruskalGen(es: Edge[]) {
+  if (es.length === 0) {
+    return [];
+  }
+
+  const currentEdges = es.concat();
+  quickSortEdges(currentEdges);
+
+  const selectedEdges: Edge[] = [];
+  const union = new UnionFind((a: Vertex) => JSON.stringify(a));
+
+  for (const edge of currentEdges) {
+    if (!union.isInSameSet(edge.v0, edge.v1)) {
+      union.add(edge.v0, edge.v1);
+      selectedEdges.push(edge);
+      yield edge;
     }
   }
 

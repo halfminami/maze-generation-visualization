@@ -1,11 +1,15 @@
 import { Edge, Vertex } from '../settings';
 import { gridEdge, gridVertex } from './func';
-import { primGen } from './spanningTree';
+import { kruskalGen, primGen } from './spanningTree';
 import { SpanningTreeTestArg, spanningTreeTests } from './testdata';
 
 describe('spanning trees', () => {
-  describe("prim's algorithm", () => {
+  describe("Prim's algorithm", () => {
     runTest(primGen);
+  });
+
+  describe("Kruskal's algorithm", () => {
+    runTest(kruskalGen);
   });
 });
 
