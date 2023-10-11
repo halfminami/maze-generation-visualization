@@ -2,6 +2,8 @@
 
 Maze generation animation with Prim's algorithm, Kruskal's algorithm and DFS.
 
+![screenshot](./maze-generation-screenshot.png)
+
 ## Description
 
 Maze can be generated with spanning tree using graph nodes representing grid. [Maze Generation Algorithm - wikipedia](https://en.wikipedia.org/wiki/Maze_generation_algorithm)
