@@ -8,19 +8,8 @@ $frame-class: maze-frame;
   --width: 2rem;
   --border-width: 0.3rem;
 
-  --checked: rgb(224, 255, 180);
-  --dark-checked: rgb(201, 229, 160);
-
   --good: yellowgreen;
   --bad: darkred;
-}
-
-@mixin reset {
-  font-size: inherit;
-  background-color: inherit;
-  padding: inherit;
-  margin: inherit;
-  border: none;
 }
 
 div.#{$frame-class} {
@@ -28,38 +17,23 @@ div.#{$frame-class} {
   width: fit-content;
   border: var(--border-width) solid var(--color);
 
-  & > button {
-    @include reset();
-
-    cursor: pointer;
-
+  div.cell {
     border: var(--border-width) solid var(--lightgray);
     width: var(--width);
     aspect-ratio: 1/1;
     background-color: var(--background-color);
-
-    &:hover {
-      background-color: var(--dark-background-color);
-    }
-
-    &.checked {
-      background-color: var(--checked);
-
-      &:hover {
-        background-color: var(--dark-checked);
-      }
-    }
+    box-sizing: border-box;
   }
 }
 
 @each $item in top, bottom, left, right {
-  div.#{$frame-class} > *.#{$item} {
-    border-#{$item}-color: var(--color);
+  div.#{$frame-class} .#{$item} {
+    border-#{$item}-color: var(--color) !important;
   }
-  div.#{$frame-class} > *.#{$item}-good {
-    border-#{$item}-color: var(--good);
+  div.#{$frame-class} .#{$item}-good {
+    border-#{$item}-color: var(--good) !important;
   }
-  div.#{$frame-class} > *.#{$item}-bad {
-    border-#{$item}-color: var(--bad);
+  div.#{$frame-class} .#{$item}-bad {
+    border-#{$item}-color: var(--bad) !important;
   }
 }

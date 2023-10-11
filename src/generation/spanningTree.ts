@@ -3,7 +3,7 @@ import { mapVertexToEdge, quickSortEdges } from './func';
 import { insertionSort } from './sort';
 import { UnionFind } from './unionFind';
 
-type Returns = Generator<[Edge, boolean], Edge[], unknown>;
+export type Returns = Generator<[Edge, boolean], Edge[], unknown>;
 
 // Prim's algorithm
 export function* primGen(es: Edge[]): Returns {
@@ -73,7 +73,6 @@ export function* primGen(es: Edge[]): Returns {
       for (let i = tosplice.length - 1; i >= 0; --i) {
         const item = tosplice[i];
 
-        // currentEdgeSet.delete(currentEdges[item]);
         currentEdges.splice(item, 1);
       }
     }
@@ -88,6 +87,9 @@ export function* kruskalGen(es: Edge[]): Returns {
     return [];
   }
 
+  const d: Map<Vertex, Edge[]> = new Map();
+  mapVertexToEdge(d, es);
+
   const currentEdges = es.concat();
   quickSortEdges(currentEdges);
 
@@ -101,6 +103,10 @@ export function* kruskalGen(es: Edge[]): Returns {
       yield [edge, true];
     } else {
       yield [edge, false];
+    }
+    // no need to check set size. for animation only
+    if (union.getSet().length > 0 && union.getSet()[0]!.size == d.size) {
+      break;
     }
   }
 

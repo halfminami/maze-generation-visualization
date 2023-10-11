@@ -1,12 +1,15 @@
 import React from 'react';
 import './Maze.scss';
-import ToggleButton from './ToggleButton';
 import { badWall, goodWall, wall } from '../settings';
 
 type Arg = { wallRight: string[]; wallBottom: string[]; w: number; h: number };
 
 function Maze({ wallRight, wallBottom, w, h }: Arg) {
-  const arr: number[][] = Array(h).fill(Array(w).fill(0));
+  w = w < 2 ? 2 : w;
+  h = h < 2 ? 2 : h;
+  const arr: number[][] = Array(h)
+    .fill(0)
+    .map((_) => Array(w).fill(0));
   while (wallBottom.length < h - 1) {
     wallBottom.push('');
   }
@@ -83,11 +86,10 @@ function Maze({ wallRight, wallBottom, w, h }: Arg) {
           })()}`;
 
           return (
-            <ToggleButton
-              classNames={['', 'checked']}
-              {...{ constClassName }}
+            <div
+              className={['cell', constClassName].join(' ')}
               key={JSON.stringify({ i, j })}
-            ></ToggleButton>
+            ></div>
           );
         })
       )}
