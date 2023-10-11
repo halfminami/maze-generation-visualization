@@ -42,8 +42,8 @@ function App() {
           </p>
           <p>
             Some algorithms to find minimum spanning tree are Prim's algorithm
-            and Kruskal's algorithm. The examples are minimum spanning tree maze
-            of random weights with the two algorithms. You can see the
+            and Kruskal's algorithm. Two of the examples are minimum spanning
+            tree maze of random weights with the algorithms. You can see the
             difference of generation process.
           </p>
           <p>

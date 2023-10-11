@@ -30,19 +30,24 @@ function WrapMaze({ gen, unique }: Arg) {
 
   const [logText, setLogText] = useState('Logs will appear here');
 
-  const [windowWid, setWindowWid] = useState(window.innerWidth);
+  const [accoWid, setAccoWid] = useState(window.innerWidth);
   const accoHead = useRef<HTMLDivElement>(null);
   const accoBody = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const listener = () => setWindowWid(window.innerWidth);
-    window.addEventListener('resize', listener);
-    return () => window.removeEventListener('resize', listener);
+    const el = accoHead.current!;
+
+    const obs = new ResizeObserver(() => {
+      setAccoWid(el.clientWidth);
+    });
+    obs.observe(el);
+
+    return () => obs.unobserve(el);
   }, []);
 
   useEffect(() => {
     accoBody.current!.style.width = `${accoHead.current?.clientWidth}px`;
-  }, [windowWid]);
+  }, [accoWid]);
 
   // fill Array(n) first! otherwise, the array would have same array
   // (changing the nwr[0][1] will result in changing nwr[i][1] for all i)
@@ -152,7 +157,9 @@ function WrapMaze({ gen, unique }: Arg) {
     <div className="m-2">
       <Accordion>
         <div className="accordion-item mt-3 mb-3">
-          <AccordionButton ref={accoHead}>settings</AccordionButton>
+          <AccordionButton ref={accoHead} style={{ minWidth: '20rem' }}>
+            settings
+          </AccordionButton>
           <AccordionBody ref={accoBody}>
             <form
               id={ids('form')}
