@@ -10,6 +10,9 @@ $frame-class: maze-frame;
 
   --checked: rgb(224, 255, 180);
   --dark-checked: rgb(201, 229, 160);
+
+  --good: yellowgreen;
+  --bad: darkred;
 }
 
 @mixin reset {
@@ -52,5 +55,11 @@ div.#{$frame-class} {
 @each $item in top, bottom, left, right {
   div.#{$frame-class} > *.#{$item} {
     border-#{$item}-color: var(--color);
+  }
+  div.#{$frame-class} > *.#{$item}-good {
+    border-#{$item}-color: var(--good);
+  }
+  div.#{$frame-class} > *.#{$item}-bad {
+    border-#{$item}-color: var(--bad);
   }
 }

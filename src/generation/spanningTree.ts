@@ -3,8 +3,10 @@ import { mapVertexToEdge, quickSortEdges } from './func';
 import { insertionSort } from './sort';
 import { UnionFind } from './unionFind';
 
+type Returns = Generator<[Edge, boolean], Edge[], unknown>;
+
 // Prim's algorithm
-export function* primGen(es: Edge[]) {
+export function* primGen(es: Edge[]): Returns {
   if (es.length === 0) {
     return [];
   }
@@ -42,7 +44,7 @@ export function* primGen(es: Edge[]) {
         addedVertex.add(edge.v1);
 
         selectedEdges.push(edge);
-        yield edge;
+        yield [edge, true];
 
         d.get(edge.v0)!.forEach((item) => {
           if (!currentEdgeSet.has(item)) {
@@ -59,6 +61,8 @@ export function* primGen(es: Edge[]) {
 
         isAdded = true;
         break;
+      } else {
+        yield [edge, false];
       }
     }
     if (!isAdded) {
@@ -69,7 +73,7 @@ export function* primGen(es: Edge[]) {
       for (let i = tosplice.length - 1; i >= 0; --i) {
         const item = tosplice[i];
 
-        currentEdgeSet.delete(currentEdges[item]);
+        // currentEdgeSet.delete(currentEdges[item]);
         currentEdges.splice(item, 1);
       }
     }
@@ -79,7 +83,7 @@ export function* primGen(es: Edge[]) {
 }
 
 // Kruskal's algorithm
-export function* kruskalGen(es: Edge[]) {
+export function* kruskalGen(es: Edge[]): Returns {
   if (es.length === 0) {
     return [];
   }
@@ -94,7 +98,9 @@ export function* kruskalGen(es: Edge[]) {
     if (!union.isInSameSet(edge.v0, edge.v1)) {
       union.add(edge.v0, edge.v1);
       selectedEdges.push(edge);
-      yield edge;
+      yield [edge, true];
+    } else {
+      yield [edge, false];
     }
   }
 

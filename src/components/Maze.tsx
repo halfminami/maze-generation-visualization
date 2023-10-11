@@ -1,7 +1,7 @@
 import React from 'react';
 import './Maze.scss';
 import ToggleButton from './ToggleButton';
-import { wall } from '../settings';
+import { badWall, goodWall, wall } from '../settings';
 
 type Arg = { wallRight: string[]; wallBottom: string[]; w: number; h: number };
 
@@ -51,6 +51,32 @@ function Maze({ wallRight, wallBottom, w, h }: Arg) {
             }
             if (i - 1 >= 0 && wallBottom[i - 1][j] === wall) {
               s += 'top ';
+            }
+
+            if (wallRight[i][j] === goodWall) {
+              s += 'right-good ';
+            }
+            if (wallRight[i][j - 1] === goodWall) {
+              s += 'left-good ';
+            }
+            if (i < h - 1 && wallBottom[i][j] === goodWall) {
+              s += 'bottom-good ';
+            }
+            if (i - 1 >= 0 && wallBottom[i - 1][j] === goodWall) {
+              s += 'top-good ';
+            }
+
+            if (wallRight[i][j] === badWall) {
+              s += 'right-bad ';
+            }
+            if (wallRight[i][j - 1] === badWall) {
+              s += 'left-bad ';
+            }
+            if (i < h - 1 && wallBottom[i][j] === badWall) {
+              s += 'bottom-bad ';
+            }
+            if (i - 1 >= 0 && wallBottom[i - 1][j] === badWall) {
+              s += 'top-bad ';
             }
 
             return s;
