@@ -51,3 +51,10 @@ $border-set: 0.1rem solid #eee;
 
 // Utilities
 @import 'bootstrap/scss/utilities/api';
+
+.w-fitc {
+  width: fit-content;
+}
+.h-fitc {
+  height: fit-content;
+}

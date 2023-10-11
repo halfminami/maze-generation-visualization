@@ -265,7 +265,7 @@ function WrapMaze({ gen, unique }: Arg) {
       >
         GO
       </Button>
-      <div className="m-auto mt-4 mb-2" style={{ width: 'fit-content' }}>
+      <div className="m-auto mt-4 mb-2 w-fitc">
         <Maze {...{ wallBottom, wallRight, w, h }} />
       </div>
       <div className="output" style={{ fontSize: '1.1rem' }}>

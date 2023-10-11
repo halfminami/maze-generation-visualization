@@ -1,5 +1,5 @@
 import { Edge, Vertex } from '../settings';
-import { mapVertexToEdge, quickSortEdges } from './func';
+import { mapVertexToEdge, quickSortEdges, selectrandom } from './func';
 import { insertionSort } from './sort';
 import { UnionFind } from './unionFind';
 
@@ -107,6 +107,61 @@ export function* kruskalGen(es: Edge[]): Returns {
     // no need to check set size. for animation only
     if (union.getSet().length > 0 && union.getSet()[0]!.size === d.size) {
       break;
+    }
+  }
+
+  return selectedEdges;
+}
+
+// yields new Edge object, do not compare with reference
+export function* DFSGen(es: Edge[]): Returns {
+  if (es.length === 0) {
+    return [];
+  }
+
+  const d: Map<Vertex, Edge[]> = new Map();
+  mapVertexToEdge(d, es);
+
+  const selectedEdges: Edge[] = [];
+  const visitedSet = new Set<Vertex>();
+
+  const stack: Vertex[] = [es[0].v0];
+  const push = (a: Vertex) => stack.push(a);
+  const peek = () => stack[stack.length - 1];
+  const pop = () => {
+    const ret = stack[stack.length - 1];
+    stack.pop();
+    return ret;
+  };
+  const empty = () => stack.length === 0;
+
+  while (!empty()) {
+    const cur = peek();
+    visitedSet.add(cur);
+
+    const notVisited: Edge[] = [];
+
+    for (const edge of d.get(cur)!) {
+      const other = cur === edge.v0 ? edge.v1 : edge.v0;
+
+      if (!visitedSet.has(other)) {
+        notVisited.push(edge);
+      }
+    }
+
+    if (notVisited.length !== 0) {
+      const selected = selectrandom(notVisited);
+
+      const other = cur === selected.v0 ? selected.v1 : selected.v0;
+
+      push(other);
+      selectedEdges.push(selected);
+      yield [selected, true];
+    } else {
+      pop();
+      if (!empty()) {
+        yield [{ v0: cur, v1: peek(), weight: 0 }, false];
+      }
     }
   }
 

@@ -61,3 +61,7 @@ export function mathrandint(begin: number, end: number): number {
   if (end - begin < 0) return 0;
   return Math.min(Math.floor(Math.random() * (end - begin)) + begin, end - 1);
 }
+
+export function selectrandom<T>(li: T[]) {
+  return li[mathrandint(0, li.length - 1)];
+}

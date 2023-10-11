@@ -1,5 +1,5 @@
 import './App.scss';
-import { kruskalGen, primGen } from './generation/spanningTree';
+import { DFSGen, kruskalGen, primGen } from './generation/spanningTree';
 import WrapMaze from './components/WrapMaze';
 import { Container } from 'react-bootstrap';
 
@@ -11,37 +11,22 @@ function App() {
         <section>
           <h2>Animations</h2>
           <main>
-            <section
-              className="card shadow-sm m-2"
-              style={{
-                height: 'fit-content',
-              }}
-            >
+            <section className="card shadow-sm m-2 h-fitc">
               <div className="card-body">
                 <h3 className="card-title">Prim's Algorithm</h3>
                 <WrapMaze gen={primGen} unique="prim" />
               </div>
             </section>
-            <section
-              className="card shadow-sm m-2"
-              style={{
-                height: 'fit-content',
-              }}
-            >
+            <section className="card shadow-sm m-2 h-fitc">
               <div className="card-body">
                 <h3 className="card-title">Kruskal's Algorithm</h3>
                 <WrapMaze gen={kruskalGen} unique="kruskal" />
               </div>
             </section>
-            <section
-              className="card shadow-sm m-2"
-              style={{
-                height: 'fit-content',
-              }}
-            >
+            <section className="card shadow-sm m-2 h-fitc">
               <div className="card-body">
-                <h3 className="card-title">Kruskal's Algorithm</h3>
-                <WrapMaze gen={kruskalGen} unique="kruskal" />
+                <h3 className="card-title">DFS</h3>
+                <WrapMaze gen={DFSGen} unique="dfs" />
               </div>
             </section>
           </main>
