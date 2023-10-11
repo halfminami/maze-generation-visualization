@@ -1,0 +1,42 @@
+@use 'sass:color';
+
+@use './index.scss';
+
+cite span.title {
+  font-weight: bold;
+}
+cite span.code {
+  background-color: lavender;
+}
+cite em {
+  color: gray;
+}
+
+section {
+  padding: 0.5rem;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+article > section + section {
+  border-top: index.$border-set;
+}
+
+h1 {
+  padding-bottom: 0.2em;
+  border-bottom: index.$border-set;
+}
+
+.card .card-title {
+  background-color: transparent;
+  background: linear-gradient(
+    transparent 70%,
+    color.adjust($color: index.$primary, $alpha: -0.9) 30%
+  );
+  width: fit-content;
+}

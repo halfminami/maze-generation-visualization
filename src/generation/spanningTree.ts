@@ -105,7 +105,7 @@ export function* kruskalGen(es: Edge[]): Returns {
       yield [edge, false];
     }
     // no need to check set size. for animation only
-    if (union.getSet().length > 0 && union.getSet()[0]!.size == d.size) {
+    if (union.getSet().length > 0 && union.getSet()[0]!.size === d.size) {
       break;
     }
   }

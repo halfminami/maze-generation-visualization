@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Edge,
   WallLetters,
@@ -15,6 +15,9 @@ import {
 import { Returns } from '../generation/spanningTree';
 import { gridEdge, gridVertex, mathrandint } from '../generation/func';
 import Maze from './Maze';
+import { Accordion, AccordionButton, Button } from 'react-bootstrap';
+import './WrapMaze.scss';
+import AccordionBody from 'react-bootstrap/esm/AccordionBody';
 
 type Arg = { gen: (es: Edge[]) => Returns; unique: string };
 
@@ -26,6 +29,20 @@ function WrapMaze({ gen, unique }: Arg) {
   const [animTime, setAnimTime] = useState(wait);
 
   const [logText, setLogText] = useState('Logs will appear here');
+
+  const [windowWid, setWindowWid] = useState(window.innerWidth);
+  const accoHead = useRef<HTMLDivElement>(null);
+  const accoBody = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const listener = () => setWindowWid(window.innerWidth);
+    window.addEventListener('resize', listener);
+    return () => window.removeEventListener('resize', listener);
+  }, []);
+
+  useEffect(() => {
+    accoBody.current!.style.width = `${accoHead.current?.clientWidth}px`;
+  }, [windowWid]);
 
   // fill Array(n) first! otherwise, the array would have same array
   // (changing the nwr[0][1] will result in changing nwr[i][1] for all i)
@@ -132,103 +149,129 @@ function WrapMaze({ gen, unique }: Arg) {
   }
 
   return (
-    <>
-      <form id={ids('form')} className="inputs">
-        <label>
-          width:{' '}
-          <input
-            type="number"
-            name="width"
-            value={w}
-            onChange={(e) =>
-              setNum(e, setW, 2, 100, (n) => `set width to ${n}`)
-            }
-          />
-        </label>
-        <label>
-          height:{' '}
-          <input
-            type="number"
-            name="height"
-            value={h}
-            onChange={(e) =>
-              setNum(e, setH, 2, 100, (n) => `set height to ${n}`)
-            }
-          />
-        </label>
-        <label>
-          random weight min:{' '}
-          <input
-            type="number"
-            name="min"
-            value={inputmin}
-            onChange={(e) =>
-              setNum(
-                e,
-                setInputmin,
-                0,
-                100,
-                (n) => `set random weight min to ${n}`
-              )
-            }
-          />
-        </label>
-        <label>
-          random weight max:{' '}
-          <input
-            type="number"
-            name="max"
-            value={inputmax}
-            onChange={(e) =>
-              setNum(
-                e,
-                setInputmax,
-                0,
-                100,
-                (n) => `set random weight max to ${n}`
-              )
-            }
-          />
-        </label>
-        <label>
-          animation interval:{' '}
-          <input
-            type="range"
-            min="0"
-            max="1000"
-            step={50}
-            name="anim-time"
-            value={animTime}
-            onChange={(e) =>
-              setNum(
-                e,
-                setAnimTime,
-                0,
-                1000,
-                (n) => `set animation interval to ${n}`
-              )
-            }
-          />
-        </label>
-        <button
-          className="go"
-          {...{ disabled }}
-          onClick={async () => {
-            setDisabled(true);
+    <div className="m-2">
+      <Accordion>
+        <div className="accordion-item mt-3 mb-3">
+          <AccordionButton ref={accoHead}>settings</AccordionButton>
+          <AccordionBody ref={accoBody}>
+            <form
+              id={ids('form')}
+              className="inputs"
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2,auto)',
+                gap: '1rem',
+                width: '100%',
+              }}
+            >
+              <label>
+                width
+                <input
+                  type="number"
+                  name="width"
+                  className="form-control"
+                  value={w}
+                  onChange={(e) =>
+                    setNum(e, setW, 2, 100, (n) => `set width to ${n}`)
+                  }
+                />
+              </label>
+              <label>
+                height
+                <input
+                  type="number"
+                  name="height"
+                  className="form-control"
+                  value={h}
+                  onChange={(e) =>
+                    setNum(e, setH, 2, 100, (n) => `set height to ${n}`)
+                  }
+                />
+              </label>
 
-            await anim();
+              <label>
+                random weight min
+                <input
+                  type="number"
+                  name="min"
+                  className="form-control"
+                  value={inputmin}
+                  onChange={(e) =>
+                    setNum(
+                      e,
+                      setInputmin,
+                      0,
+                      100,
+                      (n) => `set random weight min to ${n}`
+                    )
+                  }
+                />
+              </label>
 
-            setDisabled(false);
-          }}
-        >
-          go
-        </button>
-      </form>
-      <Maze {...{ wallBottom, wallRight, w, h }} />
-      <div className="output">
+              <label>
+                random weight max
+                <input
+                  type="number"
+                  name="max"
+                  className="form-control"
+                  value={inputmax}
+                  onChange={(e) =>
+                    setNum(
+                      e,
+                      setInputmax,
+                      0,
+                      100,
+                      (n) => `set random weight max to ${n}`
+                    )
+                  }
+                />
+              </label>
+
+              <label>
+                animation interval
+                <input
+                  type="range"
+                  className="form-control"
+                  min="0"
+                  max="1000"
+                  step={50}
+                  name="anim-time"
+                  value={animTime}
+                  onChange={(e) =>
+                    setNum(
+                      e,
+                      setAnimTime,
+                      0,
+                      1000,
+                      (n) => `set animation interval to ${n}ms`
+                    )
+                  }
+                />
+              </label>
+            </form>
+          </AccordionBody>
+        </div>
+      </Accordion>
+      <Button
+        className="go mt-1 mb-1"
+        {...{ disabled }}
+        onClick={async () => {
+          setDisabled(true);
+
+          await anim();
+
+          setDisabled(false);
+        }}
+      >
+        GO
+      </Button>
+      <div className="m-auto mt-4 mb-2" style={{ width: 'fit-content' }}>
+        <Maze {...{ wallBottom, wallRight, w, h }} />
+      </div>
+      <div className="output" style={{ fontSize: '1.1rem' }}>
         <output form={ids('form')}>{logText}</output>
       </div>
-    </>
+    </div>
   );
 }
 
