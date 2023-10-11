@@ -22,4 +22,4 @@ npm run start
 
 # Reference
 
-- (*Japanese*) "Cによるアルゴリズムとデータ構造" (Algorithms and Data Structures with C) 茨木俊秀, ISBN 978-4-274-22391-4
+- *(Japanese)* "Cによるアルゴリズムとデータ構造" (Algorithms and Data Structures with C) 茨木俊秀, ISBN 978-4-274-22391-4

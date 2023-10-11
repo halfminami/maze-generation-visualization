@@ -14,8 +14,10 @@ import {
 import { kruskalGen, primGen } from './generation/spanningTree';
 
 function App() {
-  const w = 10,
-    h = 10;
+  // const w = 10,
+  //   h = 10;
+  const [w, setW] = useState(10);
+  const [h, setH] = useState(10);
 
   // fill Array(n) first! otherwise, the array would have same array
   // (changing the nwr[0][1] will result in changing nwr[i][1] for all i)
@@ -40,12 +42,11 @@ function App() {
   const [toggle, setToggle] = useState<'prim' | 'kruskal'>('prim');
 
   return (
-    <section>
-      <h1>maze</h1>
+    <article>
+      <h1>Maze Generation Algorithm Visualization</h1>
       <main>
-        <p>The maze is surrounded by walls</p>
         <button
-          onClick={(f) => setToggle(toggle === 'prim' ? 'kruskal' : 'prim')}
+          onClick={() => setToggle(toggle === 'prim' ? 'kruskal' : 'prim')}
         >
           {toggle}
         </button>
@@ -116,7 +117,42 @@ function App() {
         </button>
         <Maze {...{ wallBottom, wallRight, w, h }} />
       </main>
-    </section>
+      <section>
+        <h2>Description</h2>
+        <p>
+          Maze can be generated with spanning tree using graph nodes
+          representing grid.{' '}
+          <a href="https://en.wikipedia.org/wiki/Maze_generation_algorithm">
+            Maze Generation Algorithm - wikipedia
+          </a>
+        </p>
+        <p>
+          Some algorithms to find minimum spanning tree are Prim's algorithm and
+          Kruskal's algorithm. The examples are minimum spanning tree maze of
+          random weights with the two algorithms. You can see the difference.
+        </p>
+        <p>
+          In addition, spanning tree can be found by random DFS with no loop.
+          You can see the process of DFS and compare its result with minimum
+          spanning tree algorithms'.
+        </p>
+      </section>
+      <section>
+        <h2>Reference</h2>
+        <ul>
+          <li>
+            <cite>
+              <em>(Japanese)</em>{' '}
+              <span className="title">
+                "Cによるアルゴリズムとデータ構造" (Algorithms and Data
+                Structures with C)
+              </span>{' '}
+              茨木俊秀, <span className="code">ISBN 978-4-274-22391-4</span>
+            </cite>
+          </li>
+        </ul>
+      </section>
+    </article>
   );
 }
 
