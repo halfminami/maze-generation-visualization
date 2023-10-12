@@ -2,16 +2,6 @@
 
 @use './index.scss';
 
-cite span.title {
-  font-weight: bold;
-}
-cite span.code {
-  background-color: lavender;
-}
-cite em {
-  color: gray;
-}
-
 section {
   padding: 0.5rem;
 }
@@ -32,11 +22,22 @@ h1 {
   border-bottom: index.$border-set;
 }
 
-.card .card-title {
-  background-color: transparent;
-  background: linear-gradient(
-    transparent 70%,
-    color.adjust($color: index.$primary, $alpha: -0.9) 30%
-  );
-  width: fit-content;
+.card {
+  margin: 0.3em;
+  box-shadow: var(--bs-box-shadow-sm) !important;
+
+  .card-title {
+    background-color: transparent;
+    background: linear-gradient(
+      transparent 70%,
+      color.adjust($color: index.$primary, $alpha: -0.9) 30%
+    );
+    width: fit-content;
+
+    display: inline;
+
+    & + a {
+      margin-left: 0.7em;
+    }
+  }
 }

@@ -7,25 +7,36 @@ function App() {
   return (
     <Container className="mt-4 mb-4">
       <article>
-        <h1>Maze Generation Algorithm Visualization</h1>
+        <h1 className="border-bottom border-3 border-primary border-opacity-25">
+          Maze Generation Algorithm Visualization
+        </h1>
         <section>
           <h2>Animations</h2>
           <main>
-            <section className="card shadow-sm m-2 h-fitc">
+            <section className="card h-fitc">
               <div className="card-body">
                 <h3 className="card-title">Prim's Algorithm</h3>
+                <a href="#prim-details" className="link-secondary">
+                  details
+                </a>
                 <WrapMaze gen={primGen} unique="prim" />
               </div>
             </section>
-            <section className="card shadow-sm m-2 h-fitc">
+            <section className="card h-fitc">
               <div className="card-body">
                 <h3 className="card-title">Kruskal's Algorithm</h3>
+                <a href="#kruskal-details" className="link-secondary">
+                  details
+                </a>
                 <WrapMaze gen={kruskalGen} unique="kruskal" />
               </div>
             </section>
-            <section className="card shadow-sm m-2 h-fitc">
+            <section className="card h-fitc">
               <div className="card-body">
                 <h3 className="card-title">DFS</h3>
+                <a href="#dfs-details" className="link-secondary">
+                  details
+                </a>
                 <WrapMaze gen={DFSGen} unique="dfs" />
               </div>
             </section>
@@ -52,22 +63,55 @@ function App() {
             spanning tree algorithms'.
           </p>
         </section>
-        {/* implementation details */}
         <section>
-          <h2>Reference</h2>
-          <ul>
-            <li>
-              <cite>
-                <em>(Japanese)</em>{' '}
-                <span className="title">
-                  "Cによるアルゴリズムとデータ構造" (Algorithms and Data
-                  Structures with C)
-                </span>{' '}
-                茨木俊秀, <span className="code">ISBN 978-4-274-22391-4</span>
-              </cite>
-            </li>
-          </ul>
+          <h2>Implementation</h2>
+          <section className="card">
+            <div className="card-body">
+              <h3 className="card-title" id="prim-details">
+                Prim's Algorithm
+              </h3>
+            </div>
+          </section>
+          <section className="card">
+            <div className="card-body">
+              <h3 className="card-title" id="kruskal-details">
+                Kruskal's Algorithm
+              </h3>
+            </div>
+          </section>
+          <section className="card">
+            <div className="card-body">
+              <h3 className="card-title" id="dfs-details">
+                stack DFS
+              </h3>
+            </div>
+          </section>
         </section>
+        <aside className="border-top border-light-subtle border-3">
+          <section>
+            <h2>Reference</h2>
+            <ul>
+              <li>
+                <cite>
+                  <span className="text-body-secondary">(Japanese)</span>{' '}
+                  <span className="fw-bold">
+                    "Cによるアルゴリズムとデータ構造" (Algorithms and Data
+                    Structures with C)
+                  </span>{' '}
+                  茨木俊秀,{' '}
+                  <span className="bg-primary-subtle">
+                    ISBN 978-4-274-22391-4
+                  </span>
+                </cite>
+              </li>
+            </ul>
+          </section>
+        </aside>
+        <footer className="bg-secondary-subtle p-2">
+          <a href="https://github.com/halfminami/maze-generation">
+            Github Repository
+          </a>
+        </footer>
       </article>
     </Container>
   );

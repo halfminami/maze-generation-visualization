@@ -1,5 +1,5 @@
 @use '../index.scss';
 
 label {
-  color: index.$mygray;
+  color: var(--bs-secondary-color);
 }
