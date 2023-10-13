@@ -15,8 +15,8 @@ Additionally, it contains creating spanning tree maze with no loop random DFS.
 ## Installation
 
 ```bash
-git clone https://github.com/halfminami/maze-generation.git
-cd maze-generation
+git clone https://github.com/halfminami/maze-generation-visualization.git
+cd maze-generation-visualization
 npm install
 npm run start
 ```
@@ -25,7 +25,8 @@ npm run start
 
 ## Uses
 
-- create-react-app
+- Create React App
+- Bootstrap
 
 ## Reference
 
