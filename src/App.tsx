@@ -271,7 +271,7 @@ function App() {
           </section>
         </aside>
         <footer className="bg-secondary-subtle p-2">
-          <a href="https://github.com/halfminami/maze-generation">
+          <a href="https://github.com/halfminami/maze-generation-visualization">
             Github Repository
           </a>
         </footer>
