@@ -1,4 +1,3 @@
-import React from 'react';
 import './Maze.scss';
 import { badWall, goodWall, wall } from '../settings';
 

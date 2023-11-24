@@ -18,15 +18,15 @@ Additionally, it contains creating spanning tree maze with no loop random DFS.
 git clone https://github.com/halfminami/maze-generation-visualization.git
 cd maze-generation-visualization
 npm install
-npm run start
+npm run dev
 ```
 
-... will start create-react-app's development server.
+... will start Vite dev server.
 
 ## Uses
 
-- Create React App
-- Bootstrap
+- React with Vite
+- React Bootstrap
 
 ## Reference
 

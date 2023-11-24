@@ -238,7 +238,7 @@ function WrapMaze({ gen, unique }: Arg) {
                 animation interval
                 <input
                   type="range"
-                  className="form-control"
+                  className="form-range"
                   min="0"
                   max="1000"
                   step={50}
@@ -283,7 +283,7 @@ function WrapMaze({ gen, unique }: Arg) {
 }
 
 function sleep(time: number) {
-  return new Promise((res, rej) => {
+  return new Promise((res) => {
     setTimeout(res, time);
   });
 }
