@@ -62,6 +62,10 @@ export function mathrandint(begin: number, end: number): number {
   return Math.min(Math.floor(Math.random() * (end - begin)) + begin, end - 1);
 }
 
-export function selectrandom<T>(li: T[]) {
-  return li[mathrandint(0, li.length - 1)];
+export function selectrandom(li: Edge[]) {
+  let minIndex = 0;
+  li.forEach(
+    (item, i) => (minIndex = item.weight < li[minIndex].weight ? i : minIndex)
+  );
+  return li[minIndex];
 }
